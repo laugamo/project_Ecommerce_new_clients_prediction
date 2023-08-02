@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "project_Ecommerce_new_clients_prediction"
 version = "0.1.0"
-description = ""
+description = "Predicting if a user will become  a client in a highly imbalanced dataset (98% - 2%)"
 authors = ["Laura Gassó"]
 
 [tool.poetry.dependencies]
@@ -10,6 +10,9 @@ dvc = "^2.10.0"
 hydra-core = "^1.1.1"
 pdoc3 = "^0.10.0"
 pandas = "^2.0.3"
+ipykernel = "^6.25.0"
+pandas-profiling = "^3.6.6"
+seaborn = "^0.12.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
