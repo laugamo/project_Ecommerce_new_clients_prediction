@@ -1,0 +1,62 @@
+data:
+  files_to_upload:
+    users: data/raw/users.txt
+    sessions: data/raw/sessions.txt
+    promotional_products_consumption: data/raw/promotional_products_consumption.txt
+    sales: data/raw/sales.txt
+  column_types:
+    users:
+      user_id: int
+      user_type: str
+      registration_date: date
+      registration_channel: str
+      is_client: bool
+      mail_type: str
+      mail_validity: int
+      user_company_type: str
+      user_company_size: str
+      user_company_ciiu: str
+      user_company_status: str
+      user_company_province: str
+      client_date: date
+    sessions:
+      user_id: int
+      session_date: date
+      number_of_sessions: int
+    promotional_products_consumption:
+      consumption_id: int
+      user_id: int
+      product_id: int
+      product_description: str
+      consumption_date: date
+      company_id: int
+      company_ciiu: str
+      company_province: str
+      company_state: str
+    sales:
+      sales_id: int
+      user_id: int
+      sales_date: date
+      sales_type: str
+      import: int
+      sales_number: int
+      imports: float
+      vp_report: bool
+      bonus: bool
+      suscription: bool
+      vp_list: bool
+  remove_decimals:
+    users:
+      - user_id
+      - registration_channel
+    sessions:
+      - user_id
+    promotional_products_consumption:
+      - consumption_id
+      - user_id
+      - product_id
+    sales:
+      - sales_id
+      - user_id
+      - imports
+      
