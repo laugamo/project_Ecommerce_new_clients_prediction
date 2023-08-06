@@ -1,6 +1,4 @@
-import hydra
 import pandas as pd
-from omegaconf import DictConfig
 
 
 def update_column_type(df, col_types, remove_decimals):
@@ -20,26 +18,25 @@ def update_column_type(df, col_types, remove_decimals):
     return df
 
 
-@hydra.main(
-    config_path="../../config/data", config_name="data_config", version_base=None
-)
-def load_data(config: DictConfig):
+def load_data(config):
     # Access the files_to_upload field from the configuration
     files_to_upload = config.data.files_to_upload
 
-    # Initialize list to store the dataframes
-    loaded_data = []
+    # Initialize dictionary to store the dataframes
+    loaded_data = {}
 
     # Upload data
     for file_name, file_path in files_to_upload.items():
         print(f"Uploading {file_path}...")
         data = pd.read_csv(file_path, sep=";", encoding="latin-1")
-        cole_types = config.data.column_types[file_name]
-        remove_decimals = config.data.remove_decimals[file_name]
+
+        # Apply column type conversions
         data = update_column_type(
-            data, cole_types, remove_decimals
-        )  # Apply column type conversions
-        loaded_data.append(data)
+            data,
+            col_types=config.data.column_types[file_name],
+            remove_decimals=config.data.remove_decimals[file_name],
+        )
+        loaded_data[file_name] = data
 
     print("All data has been uploaded")
     return loaded_data

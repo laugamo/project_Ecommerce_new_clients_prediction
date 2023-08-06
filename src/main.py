@@ -1,14 +1,20 @@
 import hydra
 from components.data_loading import load_data
+from omegaconf import DictConfig
 
 
-@hydra.main(config_path="../config/data", config_name="data_config", version_base=None)
-def main(config):
-    loaded_data = load_data(config)
+@hydra.main(config_path="../config", config_name="config", version_base=None)
+def main(config: DictConfig):
+    # Load data
+    loaded_data = load_data(config=config.data)
 
-    for data_frame in loaded_data:
+    for file_name, data_frame in loaded_data.items():
+        print(f"Data frame for file: {file_name:}")
         print(data_frame.dtypes)
         print()
+
+    # Clean data
+    # clean_data = clean_data(config, loaded_data)
 
 
 if __name__ == "__main__":
